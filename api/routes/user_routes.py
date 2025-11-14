@@ -7,10 +7,10 @@ from repositories.user_repository import UserRepository
 router = APIRouter(prefix="/users")
 
 @router.post("/")
-def create_user(username: str, email: str, db: Session = Depends(get_db)):
+def create_user(username: str, email: str, password: str, db: Session = Depends(get_db)):
     user_repo = UserRepository(db)
     user_service = UserService(user_repo)
-    user_instance = user_service.create_user(username, email)
+    user_instance = user_service.create_user(username, email, password)
     return {
         "name": user_instance.username,
         "email": user_instance.email
