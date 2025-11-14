@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.future import select
 from models import user
 
 class UserRepository:
@@ -11,3 +12,7 @@ class UserRepository:
         self.db.commit()
         self.db.refresh(user_instance)
         return user_instance
+    
+    def get_all_users(self):
+        result = self.db.execute(select(user.User))
+        return result.scalars().all()

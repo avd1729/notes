@@ -6,3 +6,6 @@ class UserService:
 
     def create_user(self, username: str, email: str):
         return self.user_repository.create_user(username, email)
+    
+    def get_all_users(self):
+        return self.user_repository.get_all_users()
